@@ -1,0 +1,8 @@
+<a ui-sref="index">返回首页</a>
+<p>这是一个基于jQuery easyui的表格，表格内容被封装到了一个名为datagrid的directive中</p>
+<p>jQuery easyui官网上提供的组件是基于Angular2+的，因此在基于Angular1的项目中还得自己做封装</p>
+<p>表格内容直接来自官网demo接口，本来是需要跨域的，但开发模式中集成了代理服务器，可以无需设置浏览器跨域进行调试</p>
+<b>DataGrid上用Angular的方法绑定了一个点击之后的alert事件,点击DataGrid蓝色的标题可查看效果</b>
+<p>同时我们也给表格的标题栏绑定了一个点击事件，但是因为jQuery对页面作了DOM操作，而Angular又要对模板进行编译，原始绑定的DOM跑到了底部分页栏</p>
+<p>由此可以看出，最好不要将操作DOM的方式和Angular数据驱动的方式混合使用，因为行为难以预测</p>
+<datagrid url="demo/main/datagrid21_getdetail.php"></datagrid>

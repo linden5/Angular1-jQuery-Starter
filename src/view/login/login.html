@@ -1,0 +1,15 @@
+<a ui-sref="index">返回首页</a>
+<div>
+    <p>这是路径的参数:<span>{{id}}</span></p>
+    请输入：<input type="text" ng-model="input">
+    <p>输入的内容将在这里显示：{{input}}</p>
+    <button ng-click="alertInput()">点击alert输入的内容</button>
+    <div>ajax结果：
+        <p ng-repeat="res in result">
+            <span>{{res.itemid}}</span>
+            <span>{{res.productid}}</span>
+            <span>{{res.listprice}}</span>
+            <span>{{res.unitcost}}</span>
+        </p>
+    </div>
+</div>

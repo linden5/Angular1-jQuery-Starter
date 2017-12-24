@@ -1,0 +1,19 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions": { 
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "jquery": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "globals": {
+        "angular": true
+    },
+    "rules": {
+        "no-console": "off"
+    }
+}
