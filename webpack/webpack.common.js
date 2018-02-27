@@ -4,30 +4,48 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var contextPath = path.resolve(__dirname, '../');
+var CONTEXT_PATH = path.resolve(__dirname, '../');
 
 module.exports = {
-    context: path.resolve(__dirname, '../'),
-    entry: './src/index.js',
+    context: CONTEXT_PATH,
     plugins: [
         new CleanWebpackPlugin(['./dist'], {
-            root: contextPath
+            root: CONTEXT_PATH
         }),
         new HtmlWebpackPlugin({
-            title: 'Angular1 starter',
             template: './src/index.html'
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery',
+            angular: 'angular',
+            moment: 'moment',
+            _: 'lodash',
             jQuery: 'jquery',
-            angular: 'angular'
+            $: 'jquery'
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common'
+            name: 'common',
+            minChunks: function (module, count) {
+                // any required modules inside node_modules are extracted to vendor
+                return (
+                    module.resource &&
+                    /\.js$/.test(module.resource) &&
+                    module.resource.indexOf(
+                    path.join(__dirname, '../node_modules')
+                    ) === 0
+                )
+            }
         })
     ],
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                include: path.join(__dirname + '../src/'),
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
             {
                 test: /\.html$/,
                 use: 'html-loader'
@@ -38,8 +56,8 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 1000,
-                            outputPath: 'image/'
+                            limit: 10000,
+                            outputPath: 'static/image/'
                         }
                     }
                 ]

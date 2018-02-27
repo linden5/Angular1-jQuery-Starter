@@ -1,24 +1,26 @@
 import {detailview} from '../../../jqlib/easyui'
 
-export default ['apiBase', 'method', function(apiBase, method) {
-    return {
-        restrict: 'E',
-        scope: {
-            url: "=url"
+export default {
+    name: 'datagrid',
+    option: {
+        bindings: {
+            url: "="
         },
-        template: require('./datagrid.html'),
-        controller: ['$scope', function($scope) {
+        template: require('./index.html'),
+        controller: ['$scope', 'API', function($scope, API) {
+            var that = this;
+    
             $scope.showAlert = function() {
                 alert('这是Angular绑定的点击事件')
             };
-
+    
             $scope.showAlertHeader = function() {
                 alert('你点到了标题')
             };
-
+    
             $('#dg').datagrid({
                 view: detailview,
-                url: apiBase + method.example,
+                url: API.ROOT + API.METHOD.EXAMPLE,
                 detailFormatter:function(){
                     return '<div class="ddv" style="padding:5px 0"></div>';
                 },
@@ -27,7 +29,7 @@ export default ['apiBase', 'method', function(apiBase, method) {
                     ddv.panel({
                         border:false,
                         cache:false,
-                        href: apiBase + $scope.url + '?itemid='+row.itemid,
+                        href: API.ROOT + that.url + '?itemid='+row.itemid,
                         onLoad:function(){
                             $('#dg').datagrid('fixDetailRowHeight',index);
                         }
@@ -37,4 +39,4 @@ export default ['apiBase', 'method', function(apiBase, method) {
             });
         }]
     }
-}];
+}

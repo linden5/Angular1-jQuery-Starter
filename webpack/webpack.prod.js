@@ -1,12 +1,18 @@
 const path = require('path');
 const merge = require('webpack-merge');
-
-const common = require('./webpack.common');
+const Webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+const config = require('../config/config');
+const common = require('./webpack.common');
+const profile = require('../config/profile');
+
 
 module.exports = merge(common,{
+    entry: './src/index.js',
     output: {
-        filename: 'script/[name].[hash].js',
+        filename: 'static/script/[name].[hash].js',
         path: path.resolve(__dirname, '../dist')
     },
     devtool: 'source-map',
@@ -15,12 +21,27 @@ module.exports = merge(common,{
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: config.sassOption
+                        }
+                    ]
                 })
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style/[name].[hash].css')
+        new Webpack.DefinePlugin({
+            'process.env': profile.prod
+        }),
+        new ExtractTextPlugin('static/style/[name].[hash].css'),
+        new UglifyJsPlugin()
     ]
 });
