@@ -5,4 +5,14 @@
 <b>DataGrid上用Angular的方法绑定了一个点击之后的alert事件,点击DataGrid蓝色的标题可查看效果</b>
 <p>同时我们也给表格的标题栏绑定了一个点击事件，但是因为jQuery对页面作了DOM操作，而Angular又要对模板进行编译，原始绑定的DOM跑到了底部分页栏</p>
 <p>由此可以看出，最好不要将操作DOM的方式和Angular数据驱动的方式混合使用，因为行为难以预测</p>
+
+<mb-datepicker element-id='date1'
+               date-message=""
+               text-color="#EFEF23"
+               line-color="#DDFE66"
+               line-thickness="3"
+               date="date"
+               date-format="YYYY-MM-DD"
+               placeholder="请选择日期"></mb-datepicker>
+
 <datagrid url="demo/main/datagrid21_getdetail.php"></datagrid>

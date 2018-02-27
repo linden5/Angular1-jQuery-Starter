@@ -6,7 +6,7 @@ import {EVENT} from '../src/config/websocket'
 import {METHOD} from '../src/config/api'
 import { setInterval, clearInterval } from 'timers';
 
-const ROOT = '/'
+const ROOT = ''
 
 function requestMapping(app, path, file) {
     app.get(ROOT + path, function(req, res) {
@@ -24,6 +24,8 @@ function initHttp(app) {
             var matches = (/^(.*)\.json$/i).exec(file);
             if (matches && matches.length > 1) {
                 var methodName = matches[1];
+                console.log(methodName)
+                console.log(METHOD[methodName])
                 requestMapping(app, METHOD[methodName], './data/' + file)
             }
         }) 

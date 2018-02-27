@@ -20,6 +20,7 @@ export default {
     
             $('#dg').datagrid({
                 view: detailview,
+                method: 'get',
                 url: API.ROOT + API.METHOD.EXAMPLE,
                 detailFormatter:function(){
                     return '<div class="ddv" style="padding:5px 0"></div>';

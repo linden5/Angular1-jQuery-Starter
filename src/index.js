@@ -1,4 +1,8 @@
-import 'angular-ui-router'
+import 'material-date-picker/build/styles/mbdatepicker.css';
+
+import '@uirouter/angularjs';
+import 'moment';
+import 'material-date-picker/build/mbdatepicker.js';
 
 import './view';
 import './service';
@@ -10,7 +14,8 @@ angular.module('app', [
     'view',
     'service',
     'component',
-    'config'
+    'config',
+    'materialDatePicker'
 ]).config(['$urlRouterProvider', function($urlRouterProvider) {
     $urlRouterProvider.otherwise('/')
 }]);
