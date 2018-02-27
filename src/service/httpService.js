@@ -1,6 +1,3 @@
-const SUCCESS_CODE = '000000'
-const CHANNEL_CODE = '04'//交易系统的渠道号
-
 export default {
     name: 'httpService',
     constructor:  ['$http', '$q',function($http, $q) {
